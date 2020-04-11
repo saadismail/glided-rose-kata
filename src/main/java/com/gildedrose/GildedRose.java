@@ -42,9 +42,12 @@ class GildedRose {
 
             if (isConjured(items[i])) {
                 items[i].sellIn = items[i].sellIn - 1;
-                if (items[i].quality > 1) {
+                if (items[i].quality == 1) {
+                    items[i].quality = 0;
+                } else if (items[i].quality > 1) {
                     items[i].quality = items[i].quality - 2;
                 }
+
                 continue;
             }
 

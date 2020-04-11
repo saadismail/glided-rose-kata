@@ -40,4 +40,13 @@ public class GildedRoseTest {
         assertEquals(-2, item.sellIn);
         assertEquals(48, item.quality);
     }
+
+    @Test
+    public void conjured_whereQualityIsOdd() {
+        Item item = new Item("Conjured Mana Cake", 1, 1);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+        gildedRose.updateQuality();
+        assertEquals(0, item.sellIn);
+        assertEquals(0, item.quality);
+    }
 }
