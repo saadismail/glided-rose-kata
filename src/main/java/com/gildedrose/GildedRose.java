@@ -47,6 +47,7 @@ class GildedRose {
                             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                                 items[i].quality = items[i].quality - 1;
                             }
+                            // test comment to be removed
                         }
                     } else {
                         items[i].quality = items[i].quality - items[i].quality;
