@@ -27,19 +27,23 @@ class GildedRose {
                 continue;
             }
 
-            if (isNotAgedBrieAndNotBackstage(items[i])) {
-                if (items[i].quality > 0) {
-                    items[i].quality = items[i].quality - 1;
-                }
-            } else {
+            if (isAgedBrie(items[i])) {
                 if (items[i].quality < 50) {
                     items[i].quality = items[i].quality + 1;
-
                 }
+
+                items[i].sellIn = items[i].sellIn - 1;
+
+                if (items[i].sellIn < 0 && items[i].quality < 50) {
+                    items[i].quality = items[i].quality + 1;
+                }
+                continue;
             }
 
+            if (items[i].quality > 0) {
+                items[i].quality = items[i].quality - 1;
+            }
             items[i].sellIn = items[i].sellIn - 1;
-
             processQualityForNegativeSellIn(items[i]);
         }
     }
@@ -58,20 +62,14 @@ class GildedRose {
 
     private void processQualityForNegativeSellIn(Item item) {
         if (item.sellIn < 0) {
-
-            if (!item.name.equals("Aged Brie")) {
-                if (item.quality > 0) {
-                    item.quality = item.quality - 1;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
+            if (item.quality > 0) {
+                item.quality = item.quality - 1;
             }
+
         }
     }
 
-    private boolean isNotAgedBrieAndNotBackstage(Item item) {
-        return !item.name.equals("Aged Brie");
+    private boolean isAgedBrie(Item item) {
+        return item.name.equals("Aged Brie");
     }
 }
