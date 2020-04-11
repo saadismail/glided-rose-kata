@@ -1,0 +1,17 @@
+package com.gildedrose;
+
+public class LegendaryItem extends Item implements AgingItem {
+
+    public LegendaryItem(String name, int sellIn, int quality) {
+        super(name, sellIn, quality);
+    }
+
+    public LegendaryItem(Item item) {
+        super(item.name, item.sellIn, item.quality);
+    }
+
+    @Override
+    public void age() {
+        // No Change
+    }
+}
