@@ -6,6 +6,12 @@ import static org.junit.Assert.assertEquals;
 
 public class BackStagePassItemTest {
 
+    @Test(expected = AssertionError.class)
+    public void testBackStagePassItem_ConstructWithNegativeValues() {
+        int initialSellIn = -2, initialQuality = -32;
+        new BackStagePassItem("foo", initialSellIn, initialQuality);
+    }
+
     @Test
     public void testBackStagePassItem() {
         int initialSellIn = 20, initialQuality = 10;

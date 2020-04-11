@@ -3,6 +3,9 @@ package com.gildedrose;
 public class BackStagePassItem extends Item implements AgingItem {
     public BackStagePassItem(String name, int sellIn, int quality) {
         super(name, sellIn, quality);
+
+        if (sellIn < 0) throw new AssertionError();
+        if (quality < 0) throw new AssertionError();
     }
 
     public BackStagePassItem(Item item) {

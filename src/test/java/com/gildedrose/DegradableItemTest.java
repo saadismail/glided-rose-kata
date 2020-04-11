@@ -5,6 +5,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class DegradableItemTest {
+
+    @Test(expected = AssertionError.class)
+    public void testDegradableItem_ConstructWithNegativeValues() {
+        int initialSellIn = -2, initialQuality = -32;
+        new DegradableItem("foo", initialSellIn, initialQuality);
+    }
+
     @Test
     public void testDegradableItem(){
         int initialSellIn = 2, initialQuality = 2;
