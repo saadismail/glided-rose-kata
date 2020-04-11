@@ -15,11 +15,12 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void updateConjuredQualityTest() {
+    public void updateConjuredTest() {
         Item[] items = new Item[] { new Item("Conjured Mana Cake", 3, 6) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(4, items[0].quality);
+        assertEquals(2, items[0].sellIn);
     }
 
 }
