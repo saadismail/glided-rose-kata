@@ -14,4 +14,13 @@ public class GildedRoseTest {
         assertEquals("fixme", app.items[0].name);
     }
 
+    @Test
+    public void testDegradableItem(){
+        int initialSellIn = 2, initialQuality = 2;
+        DegradableItem item = new DegradableItem("foo", initialSellIn, initialQuality);
+        item.age();
+        assertEquals(item.sellIn, initialSellIn-1);
+        assertEquals(item.quality, initialQuality-1);
+    }
+
 }
