@@ -7,7 +7,7 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class TexttestFixture {
+public class FixtureTest {
     @Test
     public void foo() {
         Item[] items = new Item[] {
