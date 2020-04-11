@@ -1,11 +1,17 @@
 package com.gildedrose;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import static org.junit.Assert.assertEquals;
 
 public class Texttest {
     @Test
-    public  void textTestforAllItems() {
-        System.out.println("OMGHAI!");
+    public  void textTestforAllItems() throws IOException {
 
         Item[] items = new Item[] {
                 new Item("+5 Dexterity Vest", 10, 20), //
@@ -21,16 +27,20 @@ public class Texttest {
 
         GildedRose app = new GildedRose(items);
 
-        int days = 10;
-        String []output_result = new String[days];
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("Day0.out").getFile());
+        String expected = FileUtils.readFileToString(file, "UTF-8");
+
+        int days = 1;
+        StringBuilder actual = new StringBuilder();
 
         for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality");
+            actual.append("-------- day " + i + " --------\n");
+            actual.append("name, sellIn, quality\n");
             for (Item item : items) {
-                System.out.println(item);
+                actual.append(item + "\n");
             }
-            System.out.println();
+            assertEquals(expected, actual.toString());
             app.updateQuality();
         }
     }
