@@ -60,21 +60,21 @@ class GildedRose {
         if (item.quality < 1) item.quality = 0;
     }
 
-    private void increaseBackStageQuality(Item item) {
-        if (item.quality < 50) item.quality++;
-    }
-
     private void updateBackstageQuality(Item item) {
-        increaseBackStageQuality(item);
+        increaseQuality(item);
 
-        if (item.sellIn < 11) increaseBackStageQuality(item);
-        if (item.sellIn < 6) increaseBackStageQuality(item);
+        if (item.sellIn < 11) increaseQuality(item);
+        if (item.sellIn < 6) increaseQuality(item);
 
         resetQualityToZeroIfNegative(item);
     }
 
-    private void updateAgedbrieQuality(Item item) {
+    private void increaseQuality(Item item) {
         if (item.quality < 50) item.quality++;
+    }
+
+    private void updateAgedbrieQuality(Item item) {
+        increaseQuality(item);
         resetQualityToZeroIfNegative(item);
     }
 
