@@ -29,56 +29,58 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (isAgedBrie(items[i])) {
-                updateAgedbrieQuality(i);
-            } else if (isBackstage(items[i])) {
-                updateBackstageQuality(i);
-            } else if (isSulfuras(items[i])) {
+            Item item = items[i];
+
+            if (isAgedBrie(item)) {
+                updateAgedbrieQuality(item);
+            } else if (isBackstage(item)) {
+                updateBackstageQuality(item);
+            } else if (isSulfuras(item)) {
 //                TODO: quality can not be other than 80, check and throw exception
-            } else if (isConjured(items[i])) {
-                updateConjuredQuality(i);
+            } else if (isConjured(item)) {
+                updateConjuredQuality(item);
             } else {
-                updateGeneralQuality(i);
+                updateGeneralQuality(item);
             }
 
-            if (!isEqual(items[i], "Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn--;
+            if (!isEqual(item, "Sulfuras, Hand of Ragnaros")) {
+                item.sellIn--;
             }
         }
     }
 
-    private void updateGeneralQuality(int i) {
-        items[i].quality--;
+    private void updateGeneralQuality(Item item) {
+        item.quality--;
 
-        if (items[i].sellIn < 1) items[i].quality--;
-        resetQualityToZeroIfNegative(i);
+        if (item.sellIn < 1) item.quality--;
+        resetQualityToZeroIfNegative(item);
     }
 
-    private void resetQualityToZeroIfNegative(int i) {
-        if (items[i].quality < 1) items[i].quality = 0;
+    private void resetQualityToZeroIfNegative(Item item) {
+        if (item.quality < 1) item.quality = 0;
     }
 
-    private void increaseBackStageQuality(int i) {
-        if (items[i].quality < 50) items[i].quality++;
+    private void increaseBackStageQuality(Item item) {
+        if (item.quality < 50) item.quality++;
     }
 
-    private void updateBackstageQuality(int i) {
-        increaseBackStageQuality(i);
+    private void updateBackstageQuality(Item item) {
+        increaseBackStageQuality(item);
 
-        if (items[i].sellIn < 11) increaseBackStageQuality(i);
-        if (items[i].sellIn < 6) increaseBackStageQuality(i);
+        if (item.sellIn < 11) increaseBackStageQuality(item);
+        if (item.sellIn < 6) increaseBackStageQuality(item);
 
-        resetQualityToZeroIfNegative(i);
+        resetQualityToZeroIfNegative(item);
     }
 
-    private void updateAgedbrieQuality(int i) {
-        if (items[i].quality < 50) items[i].quality++;
-        resetQualityToZeroIfNegative(i);
+    private void updateAgedbrieQuality(Item item) {
+        if (item.quality < 50) item.quality++;
+        resetQualityToZeroIfNegative(item);
     }
 
-    private void updateConjuredQuality(int i) {
-        items[i].quality -= 2;
-        resetQualityToZeroIfNegative(i);
+    private void updateConjuredQuality(Item item) {
+        item.quality -= 2;
+        resetQualityToZeroIfNegative(item);
     }
 
     public void printOutput(int days) {
