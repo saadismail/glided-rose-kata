@@ -11,7 +11,7 @@ public class GildedRoseTest {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals("fixme", app.items[0].name);
+        assertEquals("foo", app.items[0].name);
     }
 
     @Test
@@ -23,4 +23,30 @@ public class GildedRoseTest {
         assertEquals(item.quality, initialQuality-1);
     }
 
+    @Test
+    public void testDegradableItem_WhenZeroInitialSellIn() {
+        int initialSellIn = 0, initialQuality = 2;
+        DegradableItem item = new DegradableItem("foo", initialSellIn, initialQuality);
+        item.age();
+        assertEquals(item.sellIn, 0);
+        assertEquals(item.quality, 0);
+    }
+
+    @Test
+    public void testDegradableItem_WhenZeroInitialQuality() {
+        int initialSellIn = 2, initialQuality = 0;
+        DegradableItem item = new DegradableItem("foo", initialSellIn, initialQuality);
+        item.age();
+        assertEquals(item.sellIn, 1);
+        assertEquals(item.quality, 0);
+    }
+
+    @Test
+    public void testDegradableItem_WhenBothZeroSellInAndQuality() {
+        int initialSellIn = 0, initialQuality = 0;
+        DegradableItem item = new DegradableItem("foo", initialSellIn, initialQuality);
+        item.age();
+        assertEquals(item.sellIn, 0);
+        assertEquals(item.quality, 0);
+    }
 }
