@@ -31,16 +31,19 @@ public class Texttest {
         File file = new File(classLoader.getResource("Day0.out").getFile());
         String expected = FileUtils.readFileToString(file, "UTF-8");
 
-        int days = 1;
-        StringBuilder actual = new StringBuilder();
+        int days = 10;
+
 
         for (int i = 0; i < days; i++) {
+            StringBuilder actual = new StringBuilder();
             actual.append("-------- day " + i + " --------\n");
             actual.append("name, sellIn, quality\n");
             for (Item item : items) {
                 actual.append(item + "\n");
             }
-            assertEquals(expected, actual.toString());
+            file = new File("Day" + i + ".out");
+            FileUtils.writeStringToFile(file, actual.toString());
+            //assertEquals(expected, actual.toString());
             app.updateQuality();
         }
     }
