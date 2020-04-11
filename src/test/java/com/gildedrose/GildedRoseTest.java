@@ -32,6 +32,17 @@ public class GildedRoseTest {
         assertEquals(50, item.quality);
     }
 
+    @Test
+    public void elixir_qualityCannotExceed50() {
+        Item item = new Item("Elixir of the Mongoose", -1, 50);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+        gildedRose.updateQuality();
+        assertEquals(-2, item.sellIn);
+        assertEquals(48, item.quality);
+    }
+
+
+
 
 
 
