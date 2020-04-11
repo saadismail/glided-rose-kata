@@ -46,29 +46,39 @@ class GildedRose {
         }
     }
 
+
+
     private void updateGeneralQuality(int i) {
         items[i].quality--;
 
         if (items[i].sellIn < 1) items[i].quality--;
+        resetQualityToZeroIfNegative(i);
+    }
+
+    private void resetQualityToZeroIfNegative(int i) {
         if (items[i].quality < 1) items[i].quality = 0;
     }
 
-    private void updateBackstageQuality(int i) {
+    private void increaseBackStageQuality(int i) {
         if (items[i].quality < 50) items[i].quality++;
+    }
 
-        if (items[i].sellIn < 11 && items[i].quality < 50) items[i].quality++;
-        if (items[i].sellIn < 6 && items[i].quality < 50) items[i].quality++;
+    private void updateBackstageQuality(int i) {
+        increaseBackStageQuality(i);
 
-        if (items[i].quality < 1) items[i].quality = 0;
+        if (items[i].sellIn < 11) increaseBackStageQuality(i);
+        if (items[i].sellIn < 6) increaseBackStageQuality(i);
+
+        resetQualityToZeroIfNegative(i);
     }
 
     private void updateAgedbrieQuality(int i) {
         if (items[i].quality < 50) items[i].quality++;
-        if (items[i].quality < 1) items[i].quality = 0;
+        resetQualityToZeroIfNegative(i);
     }
 
     private void updateConjuredQuality(int i) {
         items[i].quality -= 2;
-        if (items[i].quality < 1) items[i].quality = 0;
+        resetQualityToZeroIfNegative(i);
     }
 }
