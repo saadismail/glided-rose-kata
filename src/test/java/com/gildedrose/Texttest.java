@@ -28,7 +28,6 @@ public class Texttest {
 
         int days = 10;
 
-
         for (int i = 0; i < days; i++) {
             String expected = getFileContentFrom("Day" + i + ".out");
 
