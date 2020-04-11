@@ -40,12 +40,24 @@ class GildedRose {
                 continue;
             }
 
+            if (isConjured(items[i])) {
+                items[i].sellIn = items[i].sellIn - 1;
+                if (items[i].quality > 1) {
+                    items[i].quality = items[i].quality - 2;
+                }
+                continue;
+            }
+
             if (items[i].quality > 0) {
                 items[i].quality = items[i].quality - 1;
             }
             items[i].sellIn = items[i].sellIn - 1;
             processQualityForNegativeSellIn(items[i]);
         }
+    }
+
+    private boolean isConjured(Item item) {
+        return item.name.equals("Conjured Mana Cake");
     }
 
     private void processQualityForBackstage(Item item) {
