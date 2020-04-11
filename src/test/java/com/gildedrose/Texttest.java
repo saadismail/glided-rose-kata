@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,24 +26,26 @@ public class Texttest {
 
         GildedRose app = new GildedRose(items);
 
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("Day0.out").getFile());
-        String expected = FileUtils.readFileToString(file, "UTF-8");
-
         int days = 10;
 
 
         for (int i = 0; i < days; i++) {
+            String expected = getFileContentFrom("Day" + i + ".out");
+
             StringBuilder actual = new StringBuilder();
             actual.append("-------- day " + i + " --------\n");
             actual.append("name, sellIn, quality\n");
             for (Item item : items) {
                 actual.append(item + "\n");
             }
-            file = new File("Day" + i + ".out");
-            FileUtils.writeStringToFile(file, actual.toString());
-            //assertEquals(expected, actual.toString());
+            assertEquals("Day " + i + " output is invalid.", expected, actual.toString());
             app.updateQuality();
         }
+    }
+
+    private String getFileContentFrom(String fileName) throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+        return FileUtils.readFileToString(file, "UTF-8");
     }
 }
