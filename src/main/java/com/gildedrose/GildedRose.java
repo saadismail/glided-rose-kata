@@ -32,14 +32,13 @@ class GildedRose {
                 updateAgedbrieQuality(i);
             } else if (isEqual(items[i], "Backstage passes to a TAFKAL80ETC concert")) {
                 updateBackstageQuality(i);
-
             } else if (isEqual(items[i], "Sulfuras, Hand of Ragnaros")) {
 //                TODO: quality can not be other than 80, check and throw exception
+            } else if (isEqual(items[i], "Conjured Mana Cake")) {
+                updateConjuredQuality(i);
             } else {
                 updateGeneralQuality(i);
             }
-
-
 
             if (!isEqual(items[i], "Sulfuras, Hand of Ragnaros")) {
                 items[i].sellIn--;
@@ -60,12 +59,16 @@ class GildedRose {
         if (items[i].sellIn < 11 && items[i].quality < 50) items[i].quality++;
         if (items[i].sellIn < 6 && items[i].quality < 50) items[i].quality++;
 
-
         if (items[i].quality < 1) items[i].quality = 0;
     }
 
     private void updateAgedbrieQuality(int i) {
         if (items[i].quality < 50) items[i].quality++;
+        if (items[i].quality < 1) items[i].quality = 0;
+    }
+
+    private void updateConjuredQuality(int i) {
+        items[i].quality -= 2;
         if (items[i].quality < 1) items[i].quality = 0;
     }
 }
