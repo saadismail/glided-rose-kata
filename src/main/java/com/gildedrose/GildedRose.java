@@ -7,10 +7,6 @@ class GildedRose {
         this.items = items;
     }
 
-    private boolean isEqual(Item item, String name) {
-        return item.name.equals(name);
-    }
-
     private boolean isAgedBrie(Item item) {
         return item.name.equals("Aged Brie");
     }
@@ -31,21 +27,28 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
             Item item = items[i];
 
-            if (isAgedBrie(item)) {
-                updateAgedbrieQuality(item);
-            } else if (isBackstage(item)) {
-                updateBackstageQuality(item);
-            } else if (isSulfuras(item)) {
-//                TODO: quality can not be other than 80, check and throw exception
-            } else if (isConjured(item)) {
-                updateConjuredQuality(item);
-            } else {
-                updateGeneralQuality(item);
-            }
+            updateItemQuality(item);
+            updateItemSellIn(item);
+        }
+    }
 
-            if (!isEqual(item, "Sulfuras, Hand of Ragnaros")) {
-                item.sellIn--;
-            }
+    private void updateItemQuality(Item item) {
+        if (isAgedBrie(item)) {
+            updateAgedbrieQuality(item);
+        } else if (isBackstage(item)) {
+            updateBackstageQuality(item);
+        } else if (isSulfuras(item)) {
+//                TODO: quality can not be other than 80, check and throw exception
+        } else if (isConjured(item)) {
+            updateConjuredQuality(item);
+        } else {
+            updateGeneralQuality(item);
+        }
+    }
+
+    private void updateItemSellIn(Item item) {
+        if (!isSulfuras(item)) {
+            item.sellIn--;
         }
     }
 
